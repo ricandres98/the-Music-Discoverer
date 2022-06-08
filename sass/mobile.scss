@@ -268,4 +268,47 @@ h1, h2, h3, h4 {
             }
         }
     }
+
+    &__buttons-panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        $button-size: 40px;
+        
+        
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: $button-size;
+            height: $button-size;
+            border: none;
+            background-color: $primary-color-2;
+            color: $white;
+            border-radius: 50%;
+            
+            &:active {
+                background-color: darken($color: $primary-color-2, $amount: 5);
+            }
+
+            img {
+                width: $button-size - 17px;
+                height: $button-size - 17px;
+            }
+        }
+        
+        .big {
+            $button-size: 70px;
+            width: $button-size;
+            height: $button-size;
+            
+            img {
+                width: 40px;
+                height: 40px;
+                position: relative;
+                left: 5px;
+            }
+        }
+    }
 }

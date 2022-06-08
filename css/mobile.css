@@ -213,5 +213,39 @@ h1, h2, h3, h4 {
   position: absolute;
   right: 0px;
 }
+.player__buttons-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+.player__buttons-panel button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #53A3A6;
+  color: #EBF0F0;
+  border-radius: 50%;
+}
+.player__buttons-panel button:active {
+  background-color: #4b9295;
+}
+.player__buttons-panel button img {
+  width: 23px;
+  height: 23px;
+}
+.player__buttons-panel .big {
+  width: 70px;
+  height: 70px;
+}
+.player__buttons-panel .big img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  left: 5px;
+}
 
 /*# sourceMappingURL=mobile.css.map */
