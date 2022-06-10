@@ -1,0 +1,181 @@
+$font-titles: 'Poppins', sans-serif;
+$font-text: 'Lato', sans-serif;
+$gray-1: #4E5657;
+$gray-2: #657070;
+$gray-3: #7C898A;
+$white: #EBF0F0;
+$primary-color-1: #1E868A;
+$primary-color-2: #53A3A6;
+$primary-color-3: #95ECF0;
+$secondary-color-1: #CFFFE0;
+$secondary-color-2: #67C989;
+$album-size: 110px;
+
+// Mixins
+
+@mixin button {
+    border: none;
+    background-color: $primary-color-2;
+    color: $white;
+    font-family: $font-titles;
+    font-weight: 600;
+    border-radius: 5px;
+
+    &:active {
+        background-color: darken($color: $primary-color-2, $amount: 5);
+    }
+}
+
+@mixin album-grid {
+    display: grid;
+    grid-template-columns: repeat(2, $album-size);
+    gap: 20px;
+    justify-content: center;
+}
+
+@mixin track-list {
+    display: grid;
+    justify-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+// Reseting styles
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+    &:focus-visible {
+        outline: 2px solid $gray-1;
+    }
+}
+
+html {
+    font-size: 62.5%;
+    background-color: $gray-2;
+}
+
+body {
+    font-family: $font-text;
+    color: $white;
+    font-size: 1.4rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: $font-titles;
+}
+
+section {
+    padding: 20px;
+}
+
+// Track item
+
+.track-item {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    background-color: $gray-3;
+    border-radius: 0 5px 5px 0;
+    $box-height: 60px;
+
+    .track-image {
+        width: $box-height;
+        height: $box-height;
+        border-radius: 2px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .track-info {
+        padding: 6px 12px;
+        max-width: calc(100% - 60px);
+
+        .track-title {
+            display: block;
+            max-height: 20px;
+            margin-bottom: 4px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: $primary-color-3;
+            overflow: hidden;
+        }
+        
+        .track-artist {
+            display: block;
+            max-height: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            overflow: hidden;
+        }
+    }
+}
+
+// Album item 
+
+.album-item {
+    width: $album-size;
+
+    .album-cover {
+        width: $album-size;
+        height: $album-size;
+        border-radius: 5px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .album-title {
+        max-height: 50px;
+        width: 100%;
+        display: inline-block;
+        padding: 5px 5px 10px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-align: center;
+        overflow: hidden;
+    }
+}
+
+// Artist item
+
+.artist-item {
+    width: $album-size;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .artist-avatar {
+        width: $album-size;
+        height: $album-size;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .artist-name {
+        max-height: 50px;
+        display: inline-block;
+        padding: 5px 5px 5px;
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-align: center;
+        overflow: hidden;
+    }
+}

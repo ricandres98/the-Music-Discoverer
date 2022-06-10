@@ -1,0 +1,34 @@
+/* Top songs */
+
+.top-songs {
+    &__title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    &__list {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+
+        .top-songs-item {
+            $box-height: 60px;
+
+            height: $box-height;
+            display: flex;
+            margin-bottom: 20px;
+    
+            .top-songs-position{
+                width: 35px;
+                height: $box-height;
+                display: flex;
+                align-items: center;
+    
+                span {
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                }
+            } 
+        }
+    }
+}

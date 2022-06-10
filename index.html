@@ -13,20 +13,23 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__main-title inactive">The Music Discoverer</h1>
-        <button class="header__back-button">&lt;</button>
-        <div class="header__search inactive">
+        <h1 class="header__main-title">The Music Discoverer</h1>
+        <button class="header__back-button inactive">&lt;</button>
+        <div class="header__search ">
             <form action="">
                 <input type="text" placeholder="Search...">
                 <button type="button">🔍</button>
             </form>
         </div>
         <h1 class="header__section-title inactive">
-            Results for <span class="search-query">hola</span>
+            Albums
+        </h1>
+        <h1 class="header__section-title search-section-title inactive">
+            Results for <span class="search-query">query</span>
         </h1>
     </header>
     
-    <section class="top-songs inactive">
+    <section class="top-songs ">
         <h2 class="top-songs__title">Top songs today</h2>
         <div class="top-songs__list">
             <div class="top-songs-item">
@@ -128,7 +131,7 @@
         </div>
     </section>
 
-    <section class="player">
+    <section class="player inactive">
         <div class="player__image-section">
             <div class="player__image-section__container">
                 <img 
@@ -150,7 +153,7 @@
         </div>
         <div class="player__buttons-panel">
             <button type="button">
-                <img src="./assets/Loop.svg" alt="Loop">
+                <img src="./assets/Loop.svg" alt="Repeat">
             </button>
             <button type="button">
                 <img src="./assets/Previous.svg" alt="Previous">
@@ -165,24 +168,25 @@
                 <img src="./assets/Shuffle.svg" alt="Shuffle">
             </button>
         </div>
+        <audio src=""></audio>
     </section>
 
     <section class="artist inactive">
-        <div class="artist_profile">
+        <div class="artist__profile">
             <div class="artist-image">
                 <img 
                     src="./assets/inna.jpg" 
                     alt="inna"
                 >
             </div>
-            <h1 class="artist-image">Inna</h1>
+            <h1 class="artist-name">Inna</h1>
         </div>
         <div class="artist__singles">
-            <div class="singles__title">
+            <div class="artist__singles__title  artist-section-title">
                 <h2>Singles</h2>
-                <button type="button">Ver más</button>
+                <button type="button" class="see-more-button">See more</button>
             </div>
-            <div class="singles__list">
+            <div class="artist__singles__list">
                 <div class="track-item">
                     <div class="track-image">
                         <img src="./assets/heat-waves.png" 
@@ -219,11 +223,11 @@
             </div>
         </div>
         <div class="artist__albums">
-            <div class="albums__title">
-                <h2>Album</h2>
-                <button type="button">Ver más</button>
+            <div class="artist__albums__title artist-section-title">
+                <h2>Albums</h2>
+                <button type="button" class="see-more-button">See more</button>
             </div>
-            <div class="albums__list">
+            <div class="artist__albums__list">
                 <div class="album-item">
                     <div class="album-cover">
                         <img 
@@ -231,7 +235,7 @@
                             alt="champagne problems"
                         >
                     </div>
-                    <span class="album-title">Champagne Problems</span>
+                    <span class="album-title">Champagne problems</span>
                 </div>
                 <div class="album-item">
                     <div class="album-cover">
@@ -265,7 +269,7 @@
     </section>
 
     <section class="album-info-section inactive">
-        <div class="album-info-container">
+        <div class="album-info">
             <div class="album-info__cover">
                 <img 
                     src="./assets/champagne-problems.jpg" 
@@ -420,6 +424,7 @@
         <div class="results__tracks">
             <h2>Tracks</h2>
             <div class="tracks-list">
+                <!-- 
                 <div class="track-item">
                     <div class="track-image">
                         <img src="./assets/heat-waves.png" 
@@ -430,35 +435,15 @@
                         <span class="track-title">Heat Waves</span>
                         <span class="track-artist">Glass Animals</span>
                     </div>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
+                </div> 
+            -->
             </div>
         </div>
 
         <div class="results__albums">
             <h2>Albums</h2>
             <div class="albums-list">
+            <!-- 
                 <div class="album-item">
                     <div class="album-cover">
                         <img 
@@ -467,40 +452,15 @@
                         >
                     </div>
                     <span class="album-title">Champagne Problems</span>
-                </div>
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div>
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div>
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div>
+                </div> 
+            -->
             </div>
         </div>
 
         <div class="results__artist">
             <h2>Artists</h2>
-            <div class="artist-list">
+            <div class="artists-list">
+            <!-- 
                 <div class="artist-item">
                     <div class="artist-avatar">
                         <img 
@@ -508,37 +468,18 @@
                             alt="Inna"
                         >
                     </div>
-                    <span class="album-title">Inna</span>
-                </div>
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="album-title">Inna</span>
-                </div>
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="album-title">Inna</span>
-                </div>
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="album-title">Inna</span>
-                </div>
+                    <span class="artist-name">Inna</span>
+                </div> 
+            -->
             </div>
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./src/secrets.js"></script>
+    <script src="./src/modules.js"></script>
+    <script src="./src/main.js"></script>
+    <script src="./src/musicPlayer.js"></script>
+    <script src="./src/navigation.js"></script>
 </body>
 </html>
