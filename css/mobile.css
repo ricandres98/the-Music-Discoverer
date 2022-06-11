@@ -225,7 +225,9 @@ section {
   object-fit: cover;
 }
 .player__info {
+  width: 100%;
   max-width: 400px;
+  margin: 0 auto;
   padding: 20px 0;
 }
 .player__info__track-name {
@@ -258,7 +260,7 @@ section {
   background-color: #CFFFE0;
 }
 .player__info .progress-bar--in {
-  width: 70%;
+  width: 0%;
   background-color: #67C989;
 }
 .player__info .progress-bar-shape {
@@ -315,6 +317,10 @@ section {
   height: 40px;
   position: relative;
   left: 5px;
+}
+.player__buttons-panel .pause img {
+  position: relative;
+  left: 1px;
 }
 
 .artist__profile {

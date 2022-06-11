@@ -27,7 +27,9 @@
     }
 
     &__info {
+        width: 100%;
         max-width: 400px;
+        margin: 0 auto;
         padding: 20px 0;
         
         &__track-name {
@@ -63,7 +65,7 @@
             }
 
             &--in {
-                width: 70%;
+                width: 0%;
                 background-color: $secondary-color-2;
             }
 
@@ -123,6 +125,13 @@
                 height: 40px;
                 position: relative;
                 left: 5px;
+            }
+        }
+
+        .pause {
+            img{
+                position: relative;
+                left: 1px;
             }
         }
     }

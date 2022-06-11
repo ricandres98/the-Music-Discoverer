@@ -91,6 +91,23 @@ function playerPage() {
     const [ id, _] = query.split('-');
 
     getTrackById(id);
+    progressBar();
+
+    audioElement.addEventListener('canplay', () => {
+        audioElement.play();
+        progressBar();
+        
+        audioElement.paused ? (
+            playPauseButtonPlayer.classList.remove('pause'),
+            playPauseIcon.src = './assets/Play.svg'
+        )
+        : (
+            playPauseButtonPlayer.classList.add('pause'),
+            playPauseIcon.src = './assets/pause.svg'
+        );
+
+        durationSpan.innerHTML = convertSeconds(audioElement.duration);
+    })
 }
 
 function artistPage() {
@@ -113,9 +130,7 @@ function artistPage() {
     const { query } = readURL();
 
     const [ id, _] = query.split('-');
-
-    
-
+ 
     getArtistById(id);    
     getArtistSinglesById(id);    
     // getArtistAlbumsById(id);    

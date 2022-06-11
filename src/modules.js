@@ -26,6 +26,11 @@ const randomButtonPlayer = document.querySelector('.player__buttons-panel button
 const playPauseIcon = document.querySelector('.player__buttons-panel button.big img');
 const audioElement = document.querySelector('audio');
 
+const fullProgressBar = document.querySelector('.progress-bar--out');
+const partialProgressBar = document.querySelector('.progress-bar--in');
+const currentTimeSpan = document.querySelector('.progress-bar__time-passed');
+const durationSpan = document.querySelector('.progress-bar__time-left');
+
 const artistImgProfile = document.querySelector('.artist__profile .artist-image img');
 const artistNameProfile = document.querySelector('.artist__profile .artist-name');
 const seeMoreSingles = document.querySelector('.artist__singles__title button');
