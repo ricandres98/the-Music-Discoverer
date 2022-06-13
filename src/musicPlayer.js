@@ -1,3 +1,10 @@
+repeatButtonPlayer.addEventListener('click', () => {
+    audioElement.loop = !audioElement.loop;
+    audioElement.loop
+        ? repeatButtonPlayer.classList.add('loop-on')
+        : repeatButtonPlayer.classList.remove('loop-on')
+});
+
 playPauseButtonPlayer.addEventListener('click', () => {
     if (audioElement.paused) {
         audioElement.play();
@@ -23,6 +30,7 @@ function progressBar() {
             partialProgressBar.style.width = progress * 100 + '%';
 
             currentTimeSpan.innerHTML = convertSeconds(currentTime);
+            durationSpan.innerHTML = '-' + convertSeconds(duration - currentTime);
         } else {
             clearInterval(interval);
         }
@@ -42,8 +50,6 @@ function convertSeconds(timeInSeconds) {
 
     const minutes = Math.floor(fullSecondsInput / 60);
     looseSeconds -= (minutes * 60);
-
-    console.log(minutes, looseSeconds);
 
     return (looseSeconds >= 10) 
         ? `${minutes}:${looseSeconds}` 

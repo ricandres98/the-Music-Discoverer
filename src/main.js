@@ -263,6 +263,7 @@ function UpdatePlayerInfo(track) {
         'alt',
         track.name
     );
+    imgPlayer.classList.remove('default');
 
     trackNamePlayer.innerText = track.name;
 
