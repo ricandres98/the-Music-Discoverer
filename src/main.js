@@ -41,7 +41,7 @@ const readURL = () => {
     };
 }
 
-function buildAlbumInfo(tracks, album, list) {
+function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
     const fragment = new DocumentFragment();
 
     list.innerHTML = '';
@@ -81,7 +81,7 @@ function buildAlbumInfo(tracks, album, list) {
         });
 
         trackItem.addEventListener('click', () => {
-            location.hash = `player=${track.id}-${track.name}`;
+            location.hash = `player=${track.id}-${track.name}?${endpoint}=${id}`;
         });
 
         trackInfo.appendChild(trackTitle);
@@ -111,7 +111,7 @@ function buildAlbumInfo(tracks, album, list) {
     });
 }
 
-function buildTracksElements(tracks, list) {
+function buildTracksElements(tracks, list, endpoint = '', query = '') {
     const fragment = new DocumentFragment();
 
     list.innerHTML = '';
@@ -152,7 +152,7 @@ function buildTracksElements(tracks, list) {
         });
 
         trackItem.addEventListener('click', () => {
-            location.hash = `player=${track.id}-${track.name}`;
+            location.hash = `player=${track.id}-${track.name}?${endpoint}=${query}`;
         });
 
         trackInfo.appendChild(trackTitle);
@@ -253,8 +253,7 @@ function buildArtistElements(artists, list) {
     list.appendChild(fragment);
 }
 
-function UpdatePlayerInfo(track) {
-    
+function UpdatePlayerInfo(track, fromPlayer = false) {
     imgPlayer.setAttribute(
         'src',
         track.album.images[1].url
@@ -273,10 +272,11 @@ function UpdatePlayerInfo(track) {
         return prev.concat(', ', current);
     });
 
-    audioElement.setAttribute(
-        'src',
-        track.preview_url
-    )
+    musicPlayer.currentTrack = track;
+    // audioElement.setAttribute(
+    //     'src',
+    //     track.preview_url
+    // )
 }
 
 function UpdateArtistInfo(artist) {
@@ -291,6 +291,7 @@ function UpdateArtistInfo(artist) {
 
     artistNameProfile.innerText = artist.name;
 }
+
 // API calls
 
 async function getSearchResults(query) {
@@ -306,8 +307,10 @@ async function getSearchResults(query) {
     const albums = data.albums.items;
     const tracks = data.tracks.items;
 
+    const endpoint = 'search';
+
     console.table("artists:", artists,"albums:", albums,"tracks:", tracks);
-    buildTracksElements(tracks, trackSearchList);
+    buildTracksElements(tracks, trackSearchList, endpoint, query);
     buildAlbumElements(albums, albumSearchList);
     buildArtistElements(artists, artistSearchList);
 }
@@ -335,8 +338,15 @@ async function getAlbumById(id) {
     console.log(data);
     const album = data.albums[0];
     const tracks = album.tracks.items;
+    const endpoint = 'album'
     
-    buildAlbumInfo(tracks, album, genericListTracksSection);
+    buildAlbumInfo({
+        tracks: tracks,
+        album: album,
+        list: genericListTracksSection,
+        endpoint: endpoint,
+        id: id,
+        });
 }
 
 async function getArtistById(id) {
