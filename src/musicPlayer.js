@@ -7,7 +7,7 @@ class Player {
         this._currentTrack = currentTrack;
         this.playlist = playlist;
         this.audioElement = audioElement;
-        this.playingIndex = 10;
+        this.playingIndex = 1;
     }
 
     async setPlaylist() {
@@ -57,17 +57,19 @@ class Player {
     }     
 
     nextTrack() {
-        const { params } = readURL();
-        this.playingIndex += 1;
-
-        let paramsString = '';
-        const paramsArray = Object.entries(params).map((param) => `${param[0]}=${param[1]}`);
-        paramsString = paramsArray.reduce((prev, current) => {
-            return prev.concat('&', current);
-        });
-
-        const id = this.playlist[this.playingIndex].id
-        location.hash = `#player=${id}?${paramsString}`;
+        if (this.playingIndex < this.playlist.length) {
+            const { params } = readURL();
+            this.playingIndex += 1;
+    
+            let paramsString = '';
+            const paramsArray = Object.entries(params).map((param) => `${param[0]}=${param[1]}`);
+            paramsString = paramsArray.reduce((prev, current) => {
+                return prev.concat('&', current);
+            });
+    
+            const id = this.playlist[this.playingIndex].id
+            location.hash = `#player=${id}?${paramsString}`;
+        }
     }
 
     previousTrack() {
@@ -117,7 +119,6 @@ nextButtonPlayer.addEventListener('click', () => musicPlayer.nextTrack());
 backButtonPlayer.addEventListener('click', () => musicPlayer.previousTrack());
 
 function progressBar() {
-
     const interval = setInterval(() => {
         if(!audioElement.paused) {
             const duration = audioElement.duration;
@@ -164,17 +165,17 @@ function approximate(value) {
     return valueApproximated;
 }
 
-async function setTrack(track) {
-    const { params } = readURL();
+// async function setTrack(track) {
+//     const { params } = readURL();
 
-    audioElement.setAttribute(
-        'src',
-        track.preview_url
-    );
+//     audioElement.setAttribute(
+//         'src',
+//         track.preview_url
+//     );
 
-    if(Object.keys(params)[0] === 'album') {
+//     if(Object.keys(params)[0] === 'album') {
 
-    } else if(Object.keys(params)[0] === 'search') {
+//     } else if(Object.keys(params)[0] === 'search') {
 
-    }
-}
+//     }
+// }

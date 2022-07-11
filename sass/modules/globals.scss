@@ -31,6 +31,12 @@ $album-size: 110px;
     grid-template-columns: repeat(2, $album-size);
     gap: 20px;
     justify-content: center;
+
+    @media screen and (min-width:600px) {
+        $album-size: 130px;
+        grid-template-columns: repeat(3, $album-size);
+        gap: 30px;
+    }
 }
 
 @mixin track-list {
@@ -38,6 +44,8 @@ $album-size: 110px;
     justify-items: center;
     gap: 20px;
     margin-bottom: 20px;
+
+    
 }
 
 // Reseting styles
@@ -71,6 +79,10 @@ section {
     padding: 20px;
 }
 
+button {
+    cursor: pointer;
+}
+
 // Track item
 
 .track-item {
@@ -80,6 +92,7 @@ section {
     background-color: $gray-3;
     border-radius: 0 5px 5px 0;
     $box-height: 60px;
+    cursor: pointer;
 
     .track-image {
         width: $box-height;
@@ -122,6 +135,7 @@ section {
 
 .album-item {
     width: $album-size;
+    cursor: pointer;
 
     .album-cover {
         width: $album-size;
@@ -155,6 +169,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 
     .artist-avatar {
         width: $album-size;
@@ -177,5 +192,95 @@ section {
         font-weight: 700;
         text-align: center;
         overflow: hidden;
+    }
+}
+
+@media  screen and (min-width: 600px) {
+     // Track item
+     $album-size: 130px;
+
+    .track-item {
+        max-width: 490px;
+        $box-height: 76px;
+
+        .track-image {
+            width: $box-height;
+            height: $box-height;
+        }
+
+        .track-info {
+            padding: 15px 20px;
+            max-width: calc(100% - 60px);
+
+            .track-title {
+                max-height: 20px;
+                margin-bottom: 4px;
+                font-size: 1.8rem;
+            }
+            
+            .track-artist {
+                max-height: 22px;
+                font-size: 1.6rem;
+            }
+        }
+    }  
+    
+    // Album item
+    .album-item {
+        width: $album-size;
+    
+        .album-cover {
+            width: $album-size;
+            height: $album-size;
+    
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    
+        .album-title {
+            max-height: 50px;
+            width: 100%;
+            display: inline-block;
+            padding: 5px 5px 10px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-align: center;
+            overflow: hidden;
+        }
+    }
+
+    // Artist item
+
+    .artist-item {
+        width: $album-size;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .artist-avatar {
+            width: $album-size;
+            height: $album-size;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .artist-name {
+            max-height: 50px;
+            display: inline-block;
+            padding: 5px 5px 5px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            overflow: hidden;
+        }
     }
 }

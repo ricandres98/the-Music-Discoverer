@@ -35,3 +35,25 @@
 
     }
 }
+
+@media screen and (min-width: 600px) {
+    .album-info-section {
+        height: 340px;
+        .album-info {
+            &__cover {
+                $size: 220px;
+                width: $size;
+                height: $size;
+                margin-bottom: 10px;
+            }
+            
+            &__title {
+                font-size: 2.4rem;
+            }
+    
+            &__artist {
+                font-size: 1.8rem;
+            }
+        }   
+    }
+}

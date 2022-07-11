@@ -25,3 +25,17 @@
     @include album-grid();
     margin-bottom: 20px;
 }
+
+@media  screen and (min-width: 600px) {
+    .search-results-list {
+        h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        & > div {
+            padding-bottom: 30px;
+        }
+    }
+
+}

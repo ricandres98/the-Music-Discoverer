@@ -76,9 +76,7 @@ function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
 
         let artistList = [];
         track.artists.forEach(artist => artistList.push(artist.name));
-        trackArtist.innerText = artistList.reduce((prev, current) =>{
-            return prev.concat(', ', current);
-        });
+        trackArtist.innerText = artistList.join(', ');
 
         trackItem.addEventListener('click', () => {
             location.hash = `player=${track.id}-${track.name}?${endpoint}=${id}`;
@@ -147,9 +145,7 @@ function buildTracksElements(tracks, list, endpoint = '', query = '') {
 
         let artistList = [];
         track.artists.items.forEach(item => artistList.push(item.profile.name));
-        trackArtist.innerText = artistList.reduce((prev, current) =>{
-            return prev.concat(', ', current);
-        });
+        trackArtist.innerText = artistList.join(', ');
 
         trackItem.addEventListener('click', () => {
             location.hash = `player=${track.id}-${track.name}?${endpoint}=${query}`;
@@ -263,14 +259,20 @@ function UpdatePlayerInfo(track, fromPlayer = false) {
         track.name
     );
     imgPlayer.classList.remove('default');
+    
+    imgPlayer.addEventListener('error', ()=>{
+        imgPlayer.classList.add('default');
+        imgPlayer.setAttribute(
+            'src',
+            '../assets/corchea.svg'
+        );
+    })
 
     trackNamePlayer.innerText = track.name;
 
     let artistList = [];
     track.artists.forEach(artist => artistList.push(artist.name));
-    artistNamePlayer.innerText = artistList.reduce((prev, current) =>{
-        return prev.concat(', ', current);
-    });
+    artistNamePlayer.innerText = artistList.join(', ');
 
     musicPlayer.currentTrack = track;
     // audioElement.setAttribute(
