@@ -4,6 +4,7 @@ const api = axios.create({
         'X-RapidAPI-Key': API_KEY,
         'X-RapidAPI-Host': 'spotify23.p.rapidapi.com',
     },
+
 });
 
 // Utils
@@ -161,13 +162,66 @@ function buildTracksElements(tracks, list, endpoint = '', query = '') {
     list.appendChild(fragment);
 }
 
-function buildAlbumElements(albums, list) {
+function buildSinglesElements(tracks, list, endpoint = '', query = '') {
+    const fragment = new DocumentFragment();
+
+    list.innerHTML = '';
+
+    tracks.forEach((trackObject) => {
+        const track = trackObject;
+
+        const trackItem = document.createElement('div');
+        trackItem.classList.add('track-item');
+
+        const trackImageContainer = document.createElement('div');
+        trackImageContainer.classList.add('track-image');
+        const trackImg = document.createElement('img');
+        trackImg.setAttribute(
+            'src',
+            track.coverArt.sources[1].url
+        );
+        trackImg.setAttribute(
+            'alt',
+            track.name
+        );
+        trackImageContainer.appendChild(trackImg);
+        trackItem.appendChild(trackImageContainer);
+
+        const trackInfo = document.createElement('div');
+        trackInfo.classList.add('track-info');
+        const trackTitle = document.createElement('span');
+        trackTitle.classList.add('track-title');
+        const trackArtist = document.createElement('span');
+        trackArtist.classList.add('track-artist');
+        
+        trackTitle.innerText = track.name;
+
+        // let artistList = [];
+        // track.artists.items.forEach(item => artistList.push(item.profile.name));
+        // trackArtist.innerText = artistList.join(', ');
+
+        trackItem.addEventListener('click', () => {
+            location.hash = `player=${track.id}-${track.name}?${endpoint}=${query}`;
+        });
+
+        trackInfo.appendChild(trackTitle);
+        trackInfo.appendChild(trackArtist);
+        trackItem.appendChild(trackInfo);
+
+        fragment.appendChild(trackItem);
+    });
+
+    list.appendChild(fragment);
+}
+
+function buildAlbumElements(albums, list, {nestedData= true}) {
     const fragment = new DocumentFragment();
 
     list.innerHTML = "";
 
     albums.forEach((albumObject) => {
-        const album = albumObject.data;
+        
+        const album = (nestedData) ? albumObject.data: albumObject;
 
         const albumItem = document.createElement('div');
         albumItem.classList.add('album-item');
@@ -284,12 +338,17 @@ function UpdatePlayerInfo(track, fromPlayer = false) {
 function UpdateArtistInfo(artist) {
     artistImgProfile.setAttribute(
         'src',
-        artist.images[1].url
+        artist.images.filter(image => image.height < 300)[0].url
     );
     artistImgProfile.setAttribute(
         'alt',
         artist.name
     );
+
+    artistPictureSourceProfile.setAttribute(
+        'srcset',
+        artist.images.filter(image => image.height > 500)[0].url
+    )
 
     artistNameProfile.innerText = artist.name;
 }
@@ -313,7 +372,7 @@ async function getSearchResults(query) {
 
     console.table("artists:", artists,"albums:", albums,"tracks:", tracks);
     buildTracksElements(tracks, trackSearchList, endpoint, query);
-    buildAlbumElements(albums, albumSearchList);
+    buildAlbumElements(albums, albumSearchList, {nestedData: true});
     buildArtistElements(artists, artistSearchList);
 }
 
@@ -367,13 +426,29 @@ async function getArtistById(id) {
 async function getArtistSinglesById(id){
     const { data, status } = await api('artist_singles/', {
         params: {
-            'id': id,
+            id: id,
+            offset: 0,
+            limit: 10,
         }
     });
-
     console.log(data, status);
+    const singles = data.data.artist.discography.singles.items.map(item => item.releases.items[0]);
+    console.log(singles)
+    const endpoint = 'artist'
+    const { query } = readURL();
+    buildSinglesElements(singles, artistSinglesList, endpoint, query);
 }   
 
 async function getArtistAlbumsById(id){
-
+    const { data }= await api('artist_albums/', {
+        params: {
+            id: id,
+            offset: 0,
+            limit: 10,
+        }
+    });
+  console.log(data);
+    const albums = data.data.artist.discography.albums.items.map((item) => item.releases.items[0]);
+    console.log(albums)
+    buildAlbumElements(albums, artistAlbumsList, {nestedData: false});
 }

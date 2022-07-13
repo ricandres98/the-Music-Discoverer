@@ -20,10 +20,10 @@ searchInput.addEventListener('keyup', (event) => {
     }
 });
 
-seeMoreSingles.addEventListener('click', () => {
-    const { query } = readURL();
-    location.hash = `artist-singles=${query}`;
-});
+// seeMoreSingles.addEventListener('click', () => {
+//     const { query } = readURL();
+//     location.hash = `artist-singles=${query}`;
+// });
 
 seeMoreAlbums.addEventListener('click', () => {
     const { query } = readURL();
@@ -49,6 +49,9 @@ function navigator() {
     } else {
         homePage();
     }
+
+    document.documentElement.scrollTop = 0;
+    searchInput.value = ''
 }
 
 function homePage() {
@@ -132,8 +135,8 @@ function artistPage() {
     const [ id, _] = query.split('-');
  
     getArtistById(id);    
-    getArtistSinglesById(id);    
-    // getArtistAlbumsById(id);    
+    // getArtistSinglesById(id);    
+    getArtistAlbumsById(id); 
 }
 
 function artistAlbumsPage() {

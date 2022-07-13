@@ -29,107 +29,15 @@
         </h1>
     </header>
     
-    <section class="top-songs ">
-        <h2 class="top-songs__title">Top songs today</h2>
-        <div class="top-songs__list">
-            <div class="top-songs-item">
-                <div class="top-songs-position">
-                    <span>1</span>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-            </div>
-            <div class="top-songs-item">
-                <div class="top-songs-position">
-                    <span>2</span>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-            </div>
-            <div class="top-songs-item">
-                <div class="top-songs-position">
-                    <span>3</span>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-            </div>
-            <div class="top-songs-item">
-                <div class="top-songs-position">
-                    <span>4</span>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-            </div>
-            <div class="top-songs-item">
-                <div class="top-songs-position">
-                    <span>5</span>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-            </div>
-            <div class="top-songs-item">
-                <div class="top-songs-position">
-                    <span>6</span>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   <section class="main">
+    <div class="main__text">
+        <p>Life is not as good without music. Let's live a <b>better</b> life!</p>
+    </div>
+    <img 
+        src="./assets/background-notes.svg" 
+        alt="music notes"
+    >
+   </section>
 
     <section class="player inactive">
         <div class="player__image-section">
@@ -175,53 +83,12 @@
     <section class="artist inactive">
         <div class="artist__profile">
             <div class="artist-image">
-                <img 
-                    src="./assets/inna.jpg" 
-                    alt="inna"
-                >
+                <picture>
+                    <source media="(min-width: 600px)" srcset="">
+                    <img src="./assets/inna.jpg" alt="Inna">
+                </picture>
             </div>
             <h1 class="artist-name">Inna</h1>
-        </div>
-        <div class="artist__singles">
-            <div class="artist__singles__title  artist-section-title">
-                <h2>Singles</h2>
-                <button type="button" class="see-more-button">See more</button>
-            </div>
-            <div class="artist__singles__list">
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="artist__albums">
             <div class="artist__albums__title artist-section-title">
@@ -229,6 +96,7 @@
                 <button type="button" class="see-more-button">See more</button>
             </div>
             <div class="artist__albums__list">
+            <!--                 
                 <div class="album-item">
                     <div class="album-cover">
                         <img 
@@ -238,33 +106,7 @@
                     </div>
                     <span class="album-title">Champagne problems</span>
                 </div>
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div>
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div>
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div>
+            -->
             </div>
         </div>
     </section>
@@ -285,6 +127,7 @@
     </section>
 
     <section class="generic-list--albums inactive">
+    <!--         
         <div class="album-item">
             <div class="album-cover">
                 <img 
@@ -294,54 +137,11 @@
             </div>
             <span class="album-title">Champagne Problems</span>
         </div>
-        <div class="album-item">
-            <div class="album-cover">
-                <img 
-                    src="./assets/champagne-problems.jpg" 
-                    alt="champagne problems"
-                >
-            </div>
-            <span class="album-title">Champagne Problems</span>
-        </div>
-        <div class="album-item">
-            <div class="album-cover">
-                <img 
-                    src="./assets/champagne-problems.jpg" 
-                    alt="champagne problems"
-                >
-            </div>
-            <span class="album-title">Champagne Problems</span>
-        </div>
-        <div class="album-item">
-            <div class="album-cover">
-                <img 
-                    src="./assets/champagne-problems.jpg" 
-                    alt="champagne problems"
-                >
-            </div>
-            <span class="album-title">Champagne Problems</span>
-        </div>
-        <div class="album-item">
-            <div class="album-cover">
-                <img 
-                    src="./assets/champagne-problems.jpg" 
-                    alt="champagne problems"
-                >
-            </div>
-            <span class="album-title">Champagne Problems</span>
-        </div>
-        <div class="album-item">
-            <div class="album-cover">
-                <img 
-                    src="./assets/champagne-problems.jpg" 
-                    alt="champagne problems"
-                >
-            </div>
-            <span class="album-title">Champagne Problems</span>
-        </div>
+    -->
     </section>
 
     <section class="generic-list--tracks inactive">
+    <!--         
         <div class="track-item">
             <div class="track-image">
                 <img src="./assets/heat-waves.png" 
@@ -353,79 +153,14 @@
                 <span class="track-artist">Glass Animals</span>
             </div>
         </div>
-        <div class="track-item">
-            <div class="track-image">
-                <img src="./assets/heat-waves.png" 
-                    alt="Heat Waves"
-                >
-            </div>
-            <div class="track-info">
-                <span class="track-title">Heat Waves</span>
-                <span class="track-artist">Glass Animals</span>
-            </div>
-        </div>
-        <div class="track-item">
-            <div class="track-image">
-                <img src="./assets/heat-waves.png" 
-                    alt="Heat Waves"
-                >
-            </div>
-            <div class="track-info">
-                <span class="track-title">Heat Waves</span>
-                <span class="track-artist">Glass Animals</span>
-            </div>
-        </div>
-        <div class="track-item">
-            <div class="track-image">
-                <img src="./assets/heat-waves.png" 
-                    alt="Heat Waves"
-                >
-            </div>
-            <div class="track-info">
-                <span class="track-title">Heat Waves</span>
-                <span class="track-artist">Glass Animals</span>
-            </div>
-        </div>
-        <div class="track-item">
-            <div class="track-image">
-                <img src="./assets/heat-waves.png" 
-                    alt="Heat Waves"
-                >
-            </div>
-            <div class="track-info">
-                <span class="track-title">Heat Waves</span>
-                <span class="track-artist">Glass Animals</span>
-            </div>
-        </div>
-        <div class="track-item">
-            <div class="track-image">
-                <img src="./assets/heat-waves.png" 
-                    alt="Heat Waves"
-                >
-            </div>
-            <div class="track-info">
-                <span class="track-title">Heat Waves</span>
-                <span class="track-artist">Glass Animals</span>
-            </div>
-        </div>
-        <div class="track-item">
-            <div class="track-image">
-                <img src="./assets/heat-waves.png" 
-                    alt="Heat Waves"
-                >
-            </div>
-            <div class="track-info">
-                <span class="track-title">Heat Waves</span>
-                <span class="track-artist">Glass Animals</span>
-            </div>
-        </div>
+    -->
     </section>
 
     <section class="search-results-list inactive">
         <div class="results__tracks">
             <h2>Tracks</h2>
             <div class="tracks-list">
-                
+            <!--                 
                 <div class="track-item">
                     <div class="track-image">
                         <img src="./assets/heat-waves.png" 
@@ -437,53 +172,14 @@
                         <span class="track-artist">Glass Animals</span>
                     </div>
                 </div> 
-           
-                
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div> 
-           
-                
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div> 
-           
-                
-                <div class="track-item">
-                    <div class="track-image">
-                        <img src="./assets/heat-waves.png" 
-                            alt="Heat Waves"
-                        >
-                    </div>
-                    <div class="track-info">
-                        <span class="track-title">Heat Waves</span>
-                        <span class="track-artist">Glass Animals</span>
-                    </div>
-                </div> 
-           
+            -->
             </div>
         </div>
 
         <div class="results__albums">
             <h2>Albums</h2>
             <div class="albums-list">
-            
+            <!--             
                 <div class="album-item">
                     <div class="album-cover">
                         <img 
@@ -493,65 +189,14 @@
                     </div>
                     <span class="album-title">Champagne Problems</span>
                 </div> 
-           
-            
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div> 
-           
-            
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div> 
-           
-            
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div> 
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div> 
-                <div class="album-item">
-                    <div class="album-cover">
-                        <img 
-                            src="./assets/champagne-problems.jpg" 
-                            alt="champagne problems"
-                        >
-                    </div>
-                    <span class="album-title">Champagne Problems</span>
-                </div> 
-           
+            -->
             </div>
         </div>
 
         <div class="results__artist">
             <h2>Artists</h2>
             <div class="artists-list">
-            
+            <!--             
                 <div class="artist-item">
                     <div class="artist-avatar">
                         <img 
@@ -561,71 +206,16 @@
                     </div>
                     <span class="artist-name">Inna</span>
                 </div> 
-           
-            
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="artist-name">Inna</span>
-                </div> 
-           
-            
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="artist-name">Inna</span>
-                </div> 
-           
-            
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="artist-name">Inna</span>
-                </div> 
-           
-            
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="artist-name">Inna</span>
-                </div> 
-           
-            
-                <div class="artist-item">
-                    <div class="artist-avatar">
-                        <img 
-                            src="./assets/inna.jpg" 
-                            alt="Inna"
-                        >
-                    </div>
-                    <span class="artist-name">Inna</span>
-                </div> 
-           
+            -->
             </div>
         </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./src/secrets.js"></script>
-    <script src="./src/modules.js"></script>
+    <script src="./src/modules.js" ></script>
     <script src="./src/main.js"></script>
     <script src="./src/musicPlayer.js"></script>
-    <script src="./src/navigation.js"></script>
+    <script src="./src/navigation.js" ></script>
 </body>
 </html>

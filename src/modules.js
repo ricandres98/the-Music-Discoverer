@@ -1,5 +1,5 @@
 // Sections
-const topSongsSection = document.querySelector('section.top-songs');
+const topSongsSection = document.querySelector('section.main');
 const playerSection = document.querySelector('section.player');
 const artistSection = document.querySelector('section.artist');
 const albumInfoSection = document.querySelector('section.album-info-section');
@@ -32,6 +32,7 @@ const currentTimeSpan = document.querySelector('.progress-bar__time-passed');
 const durationSpan = document.querySelector('.progress-bar__time-left');
 
 const artistImgProfile = document.querySelector('.artist__profile .artist-image img');
+const artistPictureSourceProfile = document.querySelector('.artist__profile .artist-image source');
 const artistNameProfile = document.querySelector('.artist__profile .artist-name');
 const seeMoreSingles = document.querySelector('.artist__singles__title button');
 const seeMoreAlbums = document.querySelector('.artist__albums__title button');
@@ -53,3 +54,50 @@ const genericListTracksSection = document.querySelector('section.generic-list--t
 const trackSearchList = document.querySelector('.tracks-list');
 const albumSearchList = document.querySelector('.albums-list');
 const artistSearchList = document.querySelector('.artists-list');
+
+/*
+{
+    topSongsSection,
+    playerSection,
+    artistSection,
+    albumInfoSection,
+    searchResultsSection,
+    mainTitle,
+    sectionTitle,
+    searchSectionTitle,
+    searchQuerySpan,
+    backButton,
+    searchBox,
+    searchInput,
+    searchButton,
+    imgPlayer,
+    trackNamePlayer,
+    artistNamePlayer,
+    repeatButtonPlayer,
+    backButtonPlayer,
+    playPauseButtonPlayer,
+    nextButtonPlayer,
+    randomButtonPlayer,
+    playPauseIcon,
+    audioElement,
+    fullProgressBar,
+    partialProgressBar,
+    currentTimeSpan,
+    durationSpan,
+    artistImgProfile,
+    artistNameProfile,
+    seeMoreSingles,
+    seeMoreAlbums,
+    albumInfoCoverImg,
+    albumInfoName,
+    albumInfoArtist,
+    topSongsList,
+    artistSinglesList,
+    artistAlbumsList,
+    genericListAlbumsSection,
+    genericListTracksSection,
+    trackSearchList,
+    albumSearchList,
+    artistSearchList,
+}
+*/
