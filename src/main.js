@@ -89,9 +89,10 @@ function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
 
         fragment.appendChild(trackItem);
     });
-
     list.appendChild(fragment);
 
+    albumInfoCoverDiv.classList.remove('skeleton')
+    albumInfoCoverImg.classList.remove('inactive');
     albumInfoCoverImg.setAttribute(
         'src',
         album.images[1].url
@@ -102,12 +103,7 @@ function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
     );
 
     albumInfoName.innerText = album.name;
-
-    let artistList = [];
-    album.artists.forEach(artist => artistList.push(artist.name));
-    albumInfoArtist.innerText = artistList.reduce((prev, current) =>{
-        return prev.concat(', ', current);
-    });
+    albumInfoArtist.innerText = album.artists.map(artist => artist.name).join(', ');
 }
 
 function buildTracksElements(tracks, list, endpoint = '', query = '') {
@@ -313,6 +309,7 @@ function UpdatePlayerInfo(track, fromPlayer = false) {
         track.name
     );
     imgPlayer.classList.remove('default');
+    imgPlayer.classList.remove('skeleton');
     
     imgPlayer.addEventListener('error', ()=>{
         imgPlayer.classList.add('default');
@@ -324,15 +321,16 @@ function UpdatePlayerInfo(track, fromPlayer = false) {
 
     trackNamePlayer.innerText = track.name;
 
-    let artistList = [];
-    track.artists.forEach(artist => artistList.push(artist.name));
-    artistNamePlayer.innerText = artistList.join(', ');
+    trackNamePlayer.classList.remove('skeleton');
+    artistNamePlayer.classList.remove('skeleton');
+    currentTimeSpan.classList.remove('skeleton');
+    durationSpan.classList.remove('skeleton');
+
+    currentTimeSpan.innerHTML = '0:00';
+
+    artistNamePlayer.innerText = track.artists.map(artist => artist.name).join(', ');
 
     musicPlayer.currentTrack = track;
-    // audioElement.setAttribute(
-    //     'src',
-    //     track.preview_url
-    // )
 }
 
 function UpdateArtistInfo(artist) {
@@ -349,6 +347,7 @@ function UpdateArtistInfo(artist) {
         'srcset',
         artist.images.filter(image => image.height > 500)[0].url
     )
+    artistImgProfile.classList.remove('skeleton');
 
     artistNameProfile.innerText = artist.name;
 }
@@ -451,4 +450,87 @@ async function getArtistAlbumsById(id){
     const albums = data.data.artist.discography.albums.items.map((item) => item.releases.items[0]);
     console.log(albums)
     buildAlbumElements(albums, artistAlbumsList, {nestedData: false});
+}
+
+// Skeletons 
+
+function albumSkeletons(quantity, list) {
+    const albumSkeleton = 
+                        `<div class="album-item">
+                            <div class="album-cover skeleton"></div>
+                            <span class="album-title skeleton"></span>
+                        </div>`;
+
+    list.innerHTML = '';
+
+    for (let i = 0; i < quantity; i++) {
+        list.innerHTML += albumSkeleton;
+    }
+}
+
+function trackSkeletons(quantity, list) {
+    const trackSkeleton = `<div class="track-item skeleton"></div>`;
+
+    list.innerHTML = '';
+
+    for (let i = 0; i < quantity; i++) {
+        list.innerHTML += trackSkeleton;
+    }
+}
+
+function artistCardSkeletons(quantity, list) {
+    const artistSkeleton = 
+                        `<div class="artist-item">
+                            <div class="artist-avatar skeleton"></div>
+                            <span class="artist-name skeleton"></span>
+                        </div>`;
+
+    list.innerHTML = '';
+
+    for (let i = 0; i < quantity; i++) {
+        list.innerHTML += artistSkeleton;
+    }
+}
+
+function searchPageSkeletons(quantity) {
+    trackSkeletons(quantity, trackSearchList);
+    albumSkeletons(quantity, albumSearchList);
+    artistCardSkeletons(quantity, artistSearchList);
+}
+
+function artistPageSkeletons() {
+    artistImgProfile.classList.add('skeleton');
+
+    artistImgProfile.setAttribute('src','../src/assets/corchea.svg');
+    artistImgProfile.setAttribute('alt','');
+    artistPictureSourceProfile.setAttribute('srcset','');
+    artistNameProfile.innerText = '';
+
+    albumSkeletons(10, artistAlbumsList);
+}
+
+function albumPageSkeletons() {
+    albumInfoCoverDiv.classList.add('skeleton');
+    albumInfoCoverImg.classList.add('inactive');
+    albumInfoCoverImg.setAttribute('src','');
+    albumInfoCoverImg.setAttribute('alt','');
+    
+    albumInfoName.innerHTML = '';
+    albumInfoArtist.innerHTML = '';
+
+    trackSkeletons(10, genericListTracksSection);
+}
+
+function playerSkeletons() {
+    trackNamePlayer.classList.add('skeleton');
+    artistNamePlayer.classList.add('skeleton');
+
+    trackNamePlayer.innerHTML = '';
+    artistNamePlayer.innerHTML = '';
+    currentTimeSpan.innerHTML = '';
+    durationSpan.innerHTML = '';
+    
+    imgPlayer.setAttribute('src','../src/assets/corchea.svg');
+    imgPlayer.classList.add('skeleton');
+    imgPlayer.classList.add('default');
 }

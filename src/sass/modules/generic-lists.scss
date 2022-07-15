@@ -1,0 +1,7 @@
+.generic-list--tracks {
+    @include track-list();
+}
+
+.generic-list--albums {
+    @include album-grid();
+}

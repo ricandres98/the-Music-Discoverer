@@ -1,0 +1,13 @@
+@import './modules/globals.scss';
+@import './modules/header.scss';
+@import './modules/main.scss';
+@import './modules/player.scss';
+@import './modules/artist.scss';
+@import './modules/album-info.scss';
+@import './modules/generic-lists.scss';
+@import './modules/search-results.scss';
+@import './modules/skeletons.scss';
+
+.inactive {
+    display: none;
+}

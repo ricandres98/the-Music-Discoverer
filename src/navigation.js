@@ -40,8 +40,6 @@ function navigator() {
         artistPage();
     } else if (location.hash.startsWith('#artist-albums=')) {
         artistAlbumsPage();
-    } else if (location.hash.startsWith('#artist-singles=')) {
-        artistSinglesPage();
     } else if (location.hash.startsWith('#search=')) {
         searchPage();
     } else if (location.hash.startsWith('#album=')) {
@@ -51,12 +49,10 @@ function navigator() {
     }
 
     document.documentElement.scrollTop = 0;
-    searchInput.value = ''
+    searchInput.value = '';
 }
 
 function homePage() {
-    console.log('home');
-
     mainTitle.classList.remove('inactive');
     sectionTitle.classList.add('inactive');
     searchSectionTitle.classList.add('inactive');
@@ -73,8 +69,6 @@ function homePage() {
 }
 
 function playerPage() {
-    console.log('player');
-
     mainTitle.classList.add('inactive');
     sectionTitle.classList.add('inactive');
     searchSectionTitle.classList.add('inactive');
@@ -93,6 +87,8 @@ function playerPage() {
 
     const [ id, _] = query.split('-');
 
+    playerSkeletons();
+
     getTrackById(id);
     progressBar();
 
@@ -102,11 +98,11 @@ function playerPage() {
         
         audioElement.paused ? (
             playPauseButtonPlayer.classList.remove('pause'),
-            playPauseIcon.src = './assets/Play.svg'
+            playPauseIcon.src = '../src/assets/Play.svg'
         )
         : (
             playPauseButtonPlayer.classList.add('pause'),
-            playPauseIcon.src = './assets/pause.svg'
+            playPauseIcon.src = '../src/assets/pause.svg'
         );
 
         durationSpan.innerHTML = convertSeconds(audioElement.duration);
@@ -114,8 +110,6 @@ function playerPage() {
 }
 
 function artistPage() {
-    console.log('artist');
-
     mainTitle.classList.add('inactive');
     sectionTitle.classList.add('inactive');
     searchSectionTitle.classList.add('inactive');
@@ -133,15 +127,14 @@ function artistPage() {
     const { query } = readURL();
 
     const [ id, _] = query.split('-');
- 
-    getArtistById(id);    
-    // getArtistSinglesById(id);    
+    
+    artistPageSkeletons();
+    
+    getArtistById(id);     
     getArtistAlbumsById(id); 
 }
 
 function artistAlbumsPage() {
-    console.log('artistAlbums');
-
     mainTitle.classList.add('inactive');
     sectionTitle.classList.remove('inactive');
     searchSectionTitle.classList.add('inactive');
@@ -158,28 +151,24 @@ function artistAlbumsPage() {
     genericListTracksSection.classList.add('inactive');
 }
 
-function artistSinglesPage() {
-    console.log('ArtistSingles');
+// function artistSinglesPage() {
+//     mainTitle.classList.add('inactive');
+//     sectionTitle.classList.remove('inactive');
+//     searchSectionTitle.classList.add('inactive');
+//     backButton.classList.remove('inactive');
+//     searchBox.classList.add('inactive');
+//     sectionTitle.innerText = 'Singles';
 
-    mainTitle.classList.add('inactive');
-    sectionTitle.classList.remove('inactive');
-    searchSectionTitle.classList.add('inactive');
-    backButton.classList.remove('inactive');
-    searchBox.classList.add('inactive');
-    sectionTitle.innerText = 'Singles';
-
-    topSongsSection.classList.add('inactive');
-    playerSection.classList.add('inactive');
-    artistSection.classList.add('inactive');
-    albumInfoSection.classList.add('inactive');
-    searchResultsSection.classList.add('inactive');
-    genericListAlbumsSection.classList.add('inactive');
-    genericListTracksSection.classList.remove('inactive');
-}
+//     topSongsSection.classList.add('inactive');
+//     playerSection.classList.add('inactive');
+//     artistSection.classList.add('inactive');
+//     albumInfoSection.classList.add('inactive');
+//     searchResultsSection.classList.add('inactive');
+//     genericListAlbumsSection.classList.add('inactive');
+//     genericListTracksSection.classList.remove('inactive');
+// }
 
 function searchPage() {
-    console.log('Search');
-
     mainTitle.classList.add('inactive');
     sectionTitle.classList.add('inactive');
     searchSectionTitle.classList.remove('inactive');
@@ -197,13 +186,12 @@ function searchPage() {
     const { query } = readURL();
 
     searchQuerySpan.innerHTML = query;
-
+    
+    searchPageSkeletons(10);
     getSearchResults(query);
 }
 
 function albumPage() {
-    console.log('album');
-
     mainTitle.classList.add('inactive');
     sectionTitle.classList.add('inactive');
     searchSectionTitle.classList.add('inactive');
@@ -220,8 +208,9 @@ function albumPage() {
 
     const { query } = readURL();
 
-    const [ id, _] = query.split('-');
+    const [ id, _ ] = query.split('-');
 
+    albumPageSkeletons();
     getAlbumById(id);
 }
 

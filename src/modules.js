@@ -31,12 +31,14 @@ const partialProgressBar = document.querySelector('.progress-bar--in');
 const currentTimeSpan = document.querySelector('.progress-bar__time-passed');
 const durationSpan = document.querySelector('.progress-bar__time-left');
 
+const artistImgDivProfile = document.querySelector('.artist__profile .artist-image');
 const artistImgProfile = document.querySelector('.artist__profile .artist-image img');
 const artistPictureSourceProfile = document.querySelector('.artist__profile .artist-image source');
 const artistNameProfile = document.querySelector('.artist__profile .artist-name');
 const seeMoreSingles = document.querySelector('.artist__singles__title button');
 const seeMoreAlbums = document.querySelector('.artist__albums__title button');
 
+const albumInfoCoverDiv = document.querySelector('.album-info__cover');
 const albumInfoCoverImg = document.querySelector('.album-info__cover img');
 const albumInfoName = document.querySelector('h1.album-info__title');
 const albumInfoArtist = document.querySelector('h2.album-info__artist');

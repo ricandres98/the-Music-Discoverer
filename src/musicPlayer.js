@@ -91,12 +91,12 @@ class Player {
     playPause() {
         if (this.audioElement.paused) {
             this.audioElement.play();
-            playPauseIcon.src = './assets/pause.svg';
+            playPauseIcon.src = '../src/assets/pause.svg';
             playPauseButtonPlayer.classList.add('pause');
             progressBar();
         } else {
             this.audioElement.pause();
-            playPauseIcon.src = './assets/Play.svg';
+            playPauseIcon.src = '../src/assets/Play.svg';
             playPauseButtonPlayer.classList.remove('pause');
             progressBar();
         }
@@ -134,7 +134,7 @@ function progressBar() {
         }
 
         if (audioElement.ended) {
-            playPauseIcon.src = './assets/Play.svg';
+            playPauseIcon.src = '../src/assets/Play.svg';
             playPauseButtonPlayer.classList.remove('pause');
         }
     }, 150);
