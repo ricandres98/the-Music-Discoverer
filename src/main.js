@@ -42,6 +42,20 @@ const readURL = () => {
     };
 }
 
+const lazyLoader = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            const url = entry.target.getAttribute('data-img');
+            entry.target.setAttribute('src', url);
+        }
+    });
+});
+
+function setDefaultImage(target) {
+    target.src = '../src/assets/default.jpg';
+    target.alt = 'default image';
+}
+
 function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
     const fragment = new DocumentFragment();
 
@@ -121,13 +135,18 @@ function buildTracksElements(tracks, list, endpoint = '', query = '') {
         trackImageContainer.classList.add('track-image');
         const trackImg = document.createElement('img');
         trackImg.setAttribute(
-            'src',
+            'data-img',
             track.albumOfTrack.coverArt.sources[1].url
         );
         trackImg.setAttribute(
             'alt',
             track.name
         );
+
+        lazyLoader.observe(trackImg);
+
+        trackImg.addEventListener('error', (e) => setDefaultImage(e.target));
+
         trackImageContainer.appendChild(trackImg);
         trackItem.appendChild(trackImageContainer);
 
@@ -210,10 +229,12 @@ function buildSinglesElements(tracks, list, endpoint = '', query = '') {
     list.appendChild(fragment);
 }
 
-function buildAlbumElements(albums, list, {nestedData= true}) {
+function buildAlbumElements(albums, list, {nestedData= true, clear = true}) {
     const fragment = new DocumentFragment();
 
-    list.innerHTML = "";
+    if (clear) {
+        list.innerHTML = "";
+    }
 
     albums.forEach((albumObject) => {
         
@@ -227,13 +248,17 @@ function buildAlbumElements(albums, list, {nestedData= true}) {
 
         const albumImg = document.createElement('img');
         albumImg.setAttribute(
-            'src',
-            album.coverArt.sources[0].url
+            'data-img',
+            album.coverArt.sources[0]?.url
         );
         albumImg.setAttribute(
             'alt',
             album.name
         );
+
+        lazyLoader.observe(albumImg);
+
+        albumImg.addEventListener('error', (e) => setDefaultImage(e.target));
         
         albumCoverContainer.appendChild(albumImg);
         albumItem.appendChild(albumCoverContainer);
@@ -271,19 +296,23 @@ function buildArtistElements(artists, list) {
 
         const artistImg = document.createElement('img');
         artistImg.setAttribute(
-            'src',
+            'data-img',
             artist.visuals.avatarImage?.sources[1].url
         );
         artistImg.setAttribute(
             'alt',
             artist.profile.name
         );
+
+        lazyLoader.observe(artistImg);
+
+        artistImg.addEventListener('error', (e) => setDefaultImage(e.target));
         
         artistImgContainer.appendChild(artistImg);
         artistItem.appendChild(artistImgContainer);
 
         const artistNameSpan = document.createElement('span');
-        artistNameSpan.classList.add('album-name');
+        artistNameSpan.classList.add('artist-name');
         artistNameSpan.innerText = artist.profile.name;
         
         const [ _, __, id ] = artist.uri.split(':')
@@ -346,7 +375,7 @@ function UpdateArtistInfo(artist) {
     artistPictureSourceProfile.setAttribute(
         'srcset',
         artist.images.filter(image => image.height > 500)[0].url
-    )
+    );
     artistImgProfile.classList.remove('skeleton');
 
     artistNameProfile.innerText = artist.name;
@@ -422,7 +451,7 @@ async function getArtistById(id) {
     UpdateArtistInfo(artist);
 }
 
-async function getArtistSinglesById(id){
+async function getArtistSinglesById(id) {
     const { data, status } = await api('artist_singles/', {
         params: {
             id: id,
@@ -438,18 +467,61 @@ async function getArtistSinglesById(id){
     buildSinglesElements(singles, artistSinglesList, endpoint, query);
 }   
 
-async function getArtistAlbumsById(id){
-    const { data }= await api('artist_albums/', {
+async function getArtistAlbumsById(id, offset = 0) {
+    const { data } = await api('artist_albums/', {
         params: {
             id: id,
-            offset: 0,
+            offset: offset,
             limit: 10,
         }
     });
-  console.log(data);
+
+    console.log(data);
+
     const albums = data.data.artist.discography.albums.items.map((item) => item.releases.items[0]);
-    console.log(albums)
+    const totalAlbums = data.data.artist.discography.albums.totalCount;
+    printedItems = albums.length;
+    itemsLeft = totalAlbums - printedItems;
+
+    console.log(albums);
     buildAlbumElements(albums, artistAlbumsList, {nestedData: false});
+}
+
+// Infinite Scroll functions
+
+function getPaginatedAlbumsById(id) {
+    let offset = 0;
+    return async function(event) {
+        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+
+        const scrollIsBottom = scrollTop + clientHeight >= (scrollHeight - 5);
+        
+        if (scrollIsBottom) {
+            console.log('asas');
+            // debugger;
+            if (itemsLeft > 0) {
+                offset += 10;
+
+                const { data } = await api('artist_albums/', {
+                    params: {
+                        id: id,
+                        offset: offset,
+                        limit: 10,
+                    }
+                });
+                console.log(data);
+        
+                const albums = data.data.artist.discography.albums.items.map((item) => item.releases.items[0]);
+                const totalAlbums = data.data.artist.discography.albums.totalCount;
+                printedItems += albums.length;
+                itemsLeft = totalAlbums - printedItems;
+                debugger;
+                console.log(albums);
+                buildAlbumElements(albums, artistAlbumsList, {nestedData: false, clear: false});
+                event.stopPropagation();
+            }
+        }
+    }
 }
 
 // Skeletons 

@@ -1,3 +1,8 @@
+let itemsLeft;
+let printedItems = 0;
+let page = 1;
+let infiniteScroll;
+
 backButton.addEventListener('click', () => {
     history.back();
 });
@@ -34,6 +39,13 @@ window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
 
 function navigator() {
+    if (infiniteScroll) {
+        window.removeEventListener('scroll', function (e) {infiniteScroll(e)}, {passive: false});
+        infiniteScroll = undefined;
+    }
+
+    printedItems = 0;
+
     if (location.hash.startsWith('#player=')) {
         playerPage();
     } else if (location.hash.startsWith('#artist=')) {
@@ -46,6 +58,10 @@ function navigator() {
         albumPage();
     } else {
         homePage();
+    }
+
+    if (infiniteScroll) {
+        window.addEventListener('scroll', function(e) {infiniteScroll(e)}, {passive: false});
     }
 
     document.documentElement.scrollTop = 0;
@@ -126,12 +142,16 @@ function artistPage() {
 
     const { query } = readURL();
 
-    const [ id, _] = query.split('-');
+    const [ id, _ ] = query.split('-');
     
     artistPageSkeletons();
     
     getArtistById(id);     
     getArtistAlbumsById(id); 
+
+
+
+    infiniteScroll = getPaginatedAlbumsById(id);
 }
 
 function artistAlbumsPage() {
