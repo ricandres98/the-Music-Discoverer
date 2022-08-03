@@ -1,15 +1,45 @@
-const api = axios.create({
+import { API_KEY } from "./secrets";
+
+import {
+    imgPlayer,
+    trackNamePlayer,
+    artistNamePlayer,
+    currentTimeSpan,
+    durationSpan,
+    artistImgProfile,
+    artistNameProfile,
+    albumInfoCoverImg,
+    albumInfoName,
+    albumInfoArtist,
+    artistSinglesList,
+    artistAlbumsList,
+    genericListTracksSection,
+    trackSearchList,
+    albumSearchList,
+    artistSearchList,
+    artistPictureSourceProfile,
+    albumInfoCoverDiv
+} from './modules'
+
+import { paginationVars } from "./navigation";
+
+import { musicPlayer } from "./musicPlayer";
+
+import axios from "axios";
+
+export const api = axios.create({
     baseURL: 'https://spotify23.p.rapidapi.com/',
     headers: {
-        'X-RapidAPI-Key': API_KEY,
+        'X-RapidAPI-Key': process.env.API_KEYA,
         'X-RapidAPI-Host': 'spotify23.p.rapidapi.com',
     },
 
 });
 
+console.log(process.env.API_KEYA);
 // Utils
 
-const readURL = () => {
+export const readURL = () => {
     const params = {};
 
     // location.hash: category=36-History?page=1&valor2=num2&valor3=num3
@@ -51,12 +81,12 @@ const lazyLoader = new IntersectionObserver((entries) => {
     });
 });
 
-function setDefaultImage(target) {
-    target.src = '../src/assets/default.jpg';
+export function setDefaultImage(target) {
+    target.src = './assets/default.jpg';
     target.alt = 'default image';
 }
 
-function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
+export function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
     const fragment = new DocumentFragment();
 
     list.innerHTML = '';
@@ -120,7 +150,7 @@ function buildAlbumInfo({tracks, album, list, endpoint = '', id = ''}) {
     albumInfoArtist.innerText = album.artists.map(artist => artist.name).join(', ');
 }
 
-function buildTracksElements(tracks, list, endpoint = '', query = '') {
+export function buildTracksElements(tracks, list, endpoint = '', query = '') {
     const fragment = new DocumentFragment();
 
     list.innerHTML = '';
@@ -177,7 +207,7 @@ function buildTracksElements(tracks, list, endpoint = '', query = '') {
     list.appendChild(fragment);
 }
 
-function buildSinglesElements(tracks, list, endpoint = '', query = '') {
+export function buildSinglesElements(tracks, list, endpoint = '', query = '') {
     const fragment = new DocumentFragment();
 
     list.innerHTML = '';
@@ -229,7 +259,7 @@ function buildSinglesElements(tracks, list, endpoint = '', query = '') {
     list.appendChild(fragment);
 }
 
-function buildAlbumElements(albums, list, {nestedData= true, clear = true}) {
+export function buildAlbumElements(albums, list, {nestedData= true, clear = true}) {
     const fragment = new DocumentFragment();
 
     if (clear) {
@@ -280,7 +310,7 @@ function buildAlbumElements(albums, list, {nestedData= true, clear = true}) {
     list.appendChild(fragment);
 }
 
-function buildArtistElements(artists, list) {
+export function buildArtistElements(artists, list) {
     const fragment = new DocumentFragment();
 
     list.innerHTML = "";
@@ -328,7 +358,7 @@ function buildArtistElements(artists, list) {
     list.appendChild(fragment);
 }
 
-function UpdatePlayerInfo(track, fromPlayer = false) {
+export function UpdatePlayerInfo(track, fromPlayer = false) {
     imgPlayer.setAttribute(
         'src',
         track.album.images[1].url
@@ -344,7 +374,7 @@ function UpdatePlayerInfo(track, fromPlayer = false) {
         imgPlayer.classList.add('default');
         imgPlayer.setAttribute(
             'src',
-            '../assets/corchea.svg'
+            './assets/corchea.svg'
         );
     })
 
@@ -362,7 +392,7 @@ function UpdatePlayerInfo(track, fromPlayer = false) {
     musicPlayer.currentTrack = track;
 }
 
-function UpdateArtistInfo(artist) {
+export function UpdateArtistInfo(artist) {
     artistImgProfile.setAttribute(
         'src',
         artist.images.filter(image => image.height < 300)[0].url
@@ -383,7 +413,7 @@ function UpdateArtistInfo(artist) {
 
 // API calls
 
-async function getSearchResults(query) {
+export async function getSearchResults(query) {
     const { data } = await api('search/', {
         params: {
             type: 'multi',
@@ -404,7 +434,7 @@ async function getSearchResults(query) {
     buildArtistElements(artists, artistSearchList);
 }
 
-async function getTrackById(id) {
+export async function getTrackById(id) {
     const { data } = await api('tracks/', {
         params: {
             'ids': id,
@@ -417,7 +447,7 @@ async function getTrackById(id) {
     UpdatePlayerInfo(track);
 }
 
-async function getAlbumById(id) {
+export async function getAlbumById(id) {
     const { data } = await api('albums/', {
         params: {
             'ids': id,
@@ -438,7 +468,7 @@ async function getAlbumById(id) {
         });
 }
 
-async function getArtistById(id) {
+export async function getArtistById(id) {
     const { data } = await api('artists/', {
         params: {
             'ids': id,
@@ -451,7 +481,7 @@ async function getArtistById(id) {
     UpdateArtistInfo(artist);
 }
 
-async function getArtistSinglesById(id) {
+export async function getArtistSinglesById(id) {
     const { data, status } = await api('artist_singles/', {
         params: {
             id: id,
@@ -467,7 +497,7 @@ async function getArtistSinglesById(id) {
     buildSinglesElements(singles, artistSinglesList, endpoint, query);
 }   
 
-async function getArtistAlbumsById(id, offset = 0) {
+export async function getArtistAlbumsById(id, offset = 0) {
     const { data } = await api('artist_albums/', {
         params: {
             id: id,
@@ -480,8 +510,8 @@ async function getArtistAlbumsById(id, offset = 0) {
 
     const albums = data.data.artist.discography.albums.items.map((item) => item.releases.items[0]);
     const totalAlbums = data.data.artist.discography.albums.totalCount;
-    printedItems = albums.length;
-    itemsLeft = totalAlbums - printedItems;
+    paginationVars.printedItems = albums.length;
+    paginationVars.itemsLeft = totalAlbums - paginationVars.printedItems;
 
     console.log(albums);
     buildAlbumElements(albums, artistAlbumsList, {nestedData: false});
@@ -489,7 +519,7 @@ async function getArtistAlbumsById(id, offset = 0) {
 
 // Infinite Scroll functions
 
-function getPaginatedAlbumsById(id) {
+export function getPaginatedAlbumsById(id) {
     let offset = 0;
     return async function(event) {
         const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
@@ -499,7 +529,7 @@ function getPaginatedAlbumsById(id) {
         if (scrollIsBottom) {
             console.log('asas');
             // debugger;
-            if (itemsLeft > 0) {
+            if (paginationVars.itemsLeft > 0) {
                 offset += 10;
 
                 const { data } = await api('artist_albums/', {
@@ -513,8 +543,8 @@ function getPaginatedAlbumsById(id) {
         
                 const albums = data.data.artist.discography.albums.items.map((item) => item.releases.items[0]);
                 const totalAlbums = data.data.artist.discography.albums.totalCount;
-                printedItems += albums.length;
-                itemsLeft = totalAlbums - printedItems;
+                paginationVars.printedItems += albums.length;
+                paginationVars.itemsLeft = totalAlbums - paginationVars.printedItems;
                 debugger;
                 console.log(albums);
                 buildAlbumElements(albums, artistAlbumsList, {nestedData: false, clear: false});
@@ -526,7 +556,7 @@ function getPaginatedAlbumsById(id) {
 
 // Skeletons 
 
-function albumSkeletons(quantity, list) {
+export function albumSkeletons(quantity, list) {
     const albumSkeleton = 
                         `<div class="album-item">
                             <div class="album-cover skeleton"></div>
@@ -540,7 +570,7 @@ function albumSkeletons(quantity, list) {
     }
 }
 
-function trackSkeletons(quantity, list) {
+export function trackSkeletons(quantity, list) {
     const trackSkeleton = `<div class="track-item skeleton"></div>`;
 
     list.innerHTML = '';
@@ -550,7 +580,7 @@ function trackSkeletons(quantity, list) {
     }
 }
 
-function artistCardSkeletons(quantity, list) {
+export function artistCardSkeletons(quantity, list) {
     const artistSkeleton = 
                         `<div class="artist-item">
                             <div class="artist-avatar skeleton"></div>
@@ -564,16 +594,16 @@ function artistCardSkeletons(quantity, list) {
     }
 }
 
-function searchPageSkeletons(quantity) {
+export function searchPageSkeletons(quantity) {
     trackSkeletons(quantity, trackSearchList);
     albumSkeletons(quantity, albumSearchList);
     artistCardSkeletons(quantity, artistSearchList);
 }
 
-function artistPageSkeletons() {
+export function artistPageSkeletons() {
     artistImgProfile.classList.add('skeleton');
 
-    artistImgProfile.setAttribute('src','../src/assets/corchea.svg');
+    artistImgProfile.setAttribute('src','./assets/corchea.svg');
     artistImgProfile.setAttribute('alt','');
     artistPictureSourceProfile.setAttribute('srcset','');
     artistNameProfile.innerText = '';
@@ -581,7 +611,7 @@ function artistPageSkeletons() {
     albumSkeletons(10, artistAlbumsList);
 }
 
-function albumPageSkeletons() {
+export function albumPageSkeletons() {
     albumInfoCoverDiv.classList.add('skeleton');
     albumInfoCoverImg.classList.add('inactive');
     albumInfoCoverImg.setAttribute('src','');
@@ -593,7 +623,7 @@ function albumPageSkeletons() {
     trackSkeletons(10, genericListTracksSection);
 }
 
-function playerSkeletons() {
+export function playerSkeletons() {
     trackNamePlayer.classList.add('skeleton');
     artistNamePlayer.classList.add('skeleton');
 
@@ -602,7 +632,35 @@ function playerSkeletons() {
     currentTimeSpan.innerHTML = '';
     durationSpan.innerHTML = '';
     
-    imgPlayer.setAttribute('src','../src/assets/corchea.svg');
+    imgPlayer.setAttribute('src','./assets/corchea.svg');
     imgPlayer.classList.add('skeleton');
     imgPlayer.classList.add('default');
 }
+
+
+/*
+{
+    setDefaultImage
+    buildAlbumInfo
+    buildTracksElements
+    buildSinglesElements
+    buildAlbumElements
+    buildArtistElements
+    UpdatePlayerInfo
+    UpdateArtistInfo
+    getSearchResults
+    getTrackById
+    getAlbumById
+    getArtistById
+    getArtistSinglesById
+    getArtistAlbumsById
+    getPaginatedAlbumsById
+    albumSkeletons
+    trackSkeletons
+    artistCardSkeletons
+    searchPageSkeletons
+    artistPageSkeletons
+    albumPageSkeletons
+    playerSkeletons
+}
+*/

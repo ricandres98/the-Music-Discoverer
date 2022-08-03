@@ -1,3 +1,17 @@
+import {
+    repeatButtonPlayer,
+    backButtonPlayer,
+    playPauseButtonPlayer,
+    nextButtonPlayer,
+    playPauseIcon,
+    audioElement,
+    partialProgressBar,
+    currentTimeSpan,
+    durationSpan,
+} from "./modules";
+
+import { readURL, api } from "./main";
+
 class Player {
     constructor({
         currentTrack = {},
@@ -91,12 +105,12 @@ class Player {
     playPause() {
         if (this.audioElement.paused) {
             this.audioElement.play();
-            playPauseIcon.src = '../src/assets/pause.svg';
+            playPauseIcon.src = './assets/pause.svg';
             playPauseButtonPlayer.classList.add('pause');
             progressBar();
         } else {
             this.audioElement.pause();
-            playPauseIcon.src = '../src/assets/Play.svg';
+            playPauseIcon.src = './assets/Play.svg';
             playPauseButtonPlayer.classList.remove('pause');
             progressBar();
         }
@@ -111,14 +125,14 @@ class Player {
     }
 }
     
-const musicPlayer = new Player({audioElement});
+export const musicPlayer = new Player({audioElement});
 
 repeatButtonPlayer.addEventListener('click', () => musicPlayer.toggleLoop(repeatButtonPlayer));
 playPauseButtonPlayer.addEventListener('click', () => musicPlayer.playPause());
 nextButtonPlayer.addEventListener('click', () => musicPlayer.nextTrack());
 backButtonPlayer.addEventListener('click', () => musicPlayer.previousTrack());
 
-function progressBar() {
+export function progressBar() {
     const interval = setInterval(() => {
         if(!audioElement.paused) {
             const duration = audioElement.duration;
@@ -134,7 +148,7 @@ function progressBar() {
         }
 
         if (audioElement.ended) {
-            playPauseIcon.src = '../src/assets/Play.svg';
+            playPauseIcon.src = './assets/Play.svg';
             playPauseButtonPlayer.classList.remove('pause');
         }
     }, 150);
@@ -142,7 +156,7 @@ function progressBar() {
     return interval;
 }
 
-function convertSeconds(timeInSeconds) {
+export function convertSeconds(timeInSeconds) {
     const fullSecondsInput = approximate(timeInSeconds);
     let looseSeconds = fullSecondsInput;
 

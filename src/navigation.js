@@ -1,6 +1,50 @@
-let itemsLeft;
-let printedItems = 0;
-let page = 1;
+import {
+    topSongsSection,
+    playerSection,
+    artistSection,
+    albumInfoSection,
+    searchResultsSection,
+    mainTitle,
+    sectionTitle,
+    searchSectionTitle,
+    searchQuerySpan,
+    backButton,
+    searchBox,
+    searchInput,
+    searchButton,
+    playPauseButtonPlayer,
+    playPauseIcon,
+    audioElement,
+    durationSpan,
+    seeMoreAlbums,
+    genericListAlbumsSection,
+    genericListTracksSection,
+} from './modules';
+
+import { 
+    readURL,
+    getSearchResults,
+    getTrackById,
+    getAlbumById,
+    getArtistById,
+    getArtistAlbumsById,
+    getPaginatedAlbumsById,
+    searchPageSkeletons,
+    artistPageSkeletons,
+    albumPageSkeletons,
+    playerSkeletons,
+} from './main.js';
+
+import {
+    progressBar,
+    convertSeconds
+} from './musicPlayer';
+
+export const paginationVars = {
+    'itemsLeft': undefined,
+    'printedItems': 0
+};
+
 let infiniteScroll;
 
 backButton.addEventListener('click', () => {
@@ -44,7 +88,7 @@ function navigator() {
         infiniteScroll = undefined;
     }
 
-    printedItems = 0;
+    paginationVars.printedItems = 0;
 
     if (location.hash.startsWith('#player=')) {
         playerPage();
@@ -114,11 +158,11 @@ function playerPage() {
         
         audioElement.paused ? (
             playPauseButtonPlayer.classList.remove('pause'),
-            playPauseIcon.src = '../src/assets/Play.svg'
+            playPauseIcon.src = './assets/Play.svg'
         )
         : (
             playPauseButtonPlayer.classList.add('pause'),
-            playPauseIcon.src = '../src/assets/pause.svg'
+            playPauseIcon.src = './assets/pause.svg'
         );
 
         durationSpan.innerHTML = convertSeconds(audioElement.duration);
