@@ -1,0 +1,47 @@
+{
+  "name": "the-music-discoverer",
+  "version": "1.0.0",
+  "description": "A music app using a Spotify API provided by rapidapi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --config webpack.config.dev.js",
+    "dev:watch": "webpack --config webpack.config.dev.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricandres98/the-Music-Discoverer.git"
+  },
+  "keywords": [
+    "music",
+    "API REST",
+    "spotify"
+  ],
+  "author": "ricandres98",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ricandres98/the-Music-Discoverer/issues"
+  },
+  "homepage": "https://github.com/ricandres98/the-Music-Discoverer#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "axios": "^0.27.2",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
+    "dotenv-webpack": "^8.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "sass": "^1.54.1",
+    "terser-webpack-plugin": "^5.3.3",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "node-sass": "^7.0.1",
+    "sass-loader": "^13.0.2"
+  }
+}

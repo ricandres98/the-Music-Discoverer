@@ -1,13 +1,7 @@
-const axios = require('axios').default;
-import './navigation.js';
-import './musicPlayer.js';
+import './sass/mobile.scss';
 
-import { 
-    readURL, 
-    getSearchResults,
-    getTrackById,
-    getAlbumById,
-    getArtistById,
-    getArtistSinglesById,
-    getArtistAlbumsById
-} from './main';
+// import './secrets.js';
+import './modules.js';
+import './navigation.js';
+import './main.js';
+import './musicPlayer.js';
