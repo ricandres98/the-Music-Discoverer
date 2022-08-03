@@ -1,5 +1,3 @@
-import { API_KEY } from "./secrets";
-
 import {
     imgPlayer,
     trackNamePlayer,
